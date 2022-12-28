@@ -13,6 +13,7 @@ namespace PSDViewer
     public partial class Form1 : Form
     {
         public static string key = "";
+        private const string font = "Tahoma";
 
         public Form1()
         {
@@ -38,7 +39,7 @@ namespace PSDViewer
         {
             for(int i = 0; i < panels.Length; i++)
             {
-                panels[i].Location = new Point(0, 35 + i * 75 - (int)((75 * (panels.Length + 2) - Size.Height) * (vScrollBar1.Value / (float)vScrollBar1.Maximum)));
+                panels[i].Location = new Point(0, 35 + i * 75 - (int)((75 * (panels.Length+3) - Size.Height) * (vScrollBar1.Value / (float)vScrollBar1.Maximum)));
             }
 
             OnPaint(null);
@@ -48,12 +49,12 @@ namespace PSDViewer
         {
             vScrollBar1.Visible = 75 * panels.Length > Size.Height;
             vScrollBar1.Location = new Point(Size.Width - 40, 0);
-            vScrollBar1.Size = new Size(25, Size.Height-50);
+            vScrollBar1.Size = new Size(25, Size.Height-25);
 
             for (int i = 0; i < panels.Length; i++)
             {
                 panels[i].Size = new Size(Size.Width - 50, 75);
-                panels[i].Location = new Point(0, 35 + i * 75 - (int)((75 * (panels.Length + 1) - Size.Height) * (vScrollBar1.Value / (float)vScrollBar1.Maximum)));
+                panels[i].Location = new Point(0, 35 + i * 75 - (int)((75 * (panels.Length+3) - Size.Height) * (vScrollBar1.Value / (float)vScrollBar1.Maximum)));
 
                 panels[i].Controls[0].Size = new Size(Size.Width - 200, 75);
                 panels[i].Controls[1].Location = new Point(Size.Width - 200, 0);
@@ -81,7 +82,7 @@ namespace PSDViewer
             {
                 TextBox label = new TextBox();
                 label.Text = psds[i].name;
-                label.Font = new Font("Yu Gothic UI Semibold", 18, FontStyle.Regular);
+                label.Font = new Font(font, 14, FontStyle.Regular);
                 label.ReadOnly = true;
                 label.BorderStyle = 0;
                 label.BackColor = BackColor;
@@ -92,6 +93,7 @@ namespace PSDViewer
 
                 Button buttonCopy = new Button();
                 buttonCopy.Text = "Copy";
+                buttonCopy.Font = new Font(font, 10, FontStyle.Regular);
                 buttonCopy.Size = new Size(150, 25);
                 buttonCopy.Location = new Point(Size.Width - 200, 0);
 
@@ -100,13 +102,42 @@ namespace PSDViewer
 
                 Button buttonChange = new Button();
                 buttonChange.Text = "Change";
+                buttonChange.Font = new Font(font, 10, FontStyle.Regular);
                 buttonChange.Size = new Size(75, 25);
                 buttonChange.Location = new Point(Size.Width - 200, 25);
 
+                buttonChange.Click += new EventHandler((obj, _event) =>
+                {
+                    string newPass = Prompt.ShowSingleDialog("New Password:", "Set New Password", true);
+
+                    if (newPass == "") return;
+
+                    Program.PSD newPSD = new Program.PSD(psds[x].name, newPass);
+
+                    Program.ChangePassword(newPSD, psds[x]);
+
+                    MessageBox.Show($"Password for {psds[x].name} has been changed.");
+                    Reload();
+
+                });
+
                 Button buttonRemove = new Button();
                 buttonRemove.Text = "Remove";
+                buttonRemove.Font = new Font(font, 10, FontStyle.Regular);
                 buttonRemove.Size = new Size(75, 25);
                 buttonRemove.Location = new Point(Size.Width - 125, 25);
+
+                buttonRemove.Click += new EventHandler((obj, _event) =>
+                {
+                    if(!Prompt.YesNoDialog("Are you sure you want to remove this password?"))
+                    {
+                        return;
+                    }
+
+                    Program.RemovePassword(psds[x]);
+                    MessageBox.Show($"Password for {psds[x].name} has been removed.");
+                    Reload();
+                });
 
                 Panel panel = new Panel();
                 panel.Size = new Size(Size.Width, 75);
@@ -124,11 +155,14 @@ namespace PSDViewer
 
             ToolStripPanel tspTop = new ToolStripPanel();
             tspTop.Dock = DockStyle.Top;
+
             ToolStrip tsTop = new ToolStrip();
             tsTop.Items.Add("Add Password");
             tsTop.Items.Add("Generate Password");
             tsTop.Items[0].Click += Add_Password_Click;
             tsTop.Items[1].Click += Generate_Password_Click;
+            tsTop.Font = new Font(font, 12, FontStyle.Regular);
+
             tspTop.Join(tsTop);
             Controls.Add(tspTop);
             Controls.SetChildIndex(tspTop, 0);

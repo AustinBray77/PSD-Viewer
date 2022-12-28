@@ -47,9 +47,11 @@ namespace PSDViewer
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(350, 500);
             this.Controls.Add(this.vScrollBar1);
+            this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Password Viewer";
+            this.Font = new System.Drawing.Font("Microsoft Jhenghei UI", 14, System.Drawing.FontStyle.Regular);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.SizeChanged += new System.EventHandler(this.Form1_SizeChanged);
             this.ResumeLayout(false);

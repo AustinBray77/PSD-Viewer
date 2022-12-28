@@ -99,5 +99,76 @@ namespace PSDViewer
 
             return true;
         }
+
+        public static bool RemovePassword(PSD password)
+        {
+            try
+            {
+                StreamReader sr = File.OpenText(dir + "\\psds\\psd.txt");
+
+                string encryptedData = EncryptorLIB.Encryptor.EncryptWithKey(password.name + "[" + password.value, Form1.key);
+                string line;
+                string data = "";
+
+                while((line = sr.ReadLine()) != null)
+                {
+                    if(encryptedData != line)
+                    {
+                        data += line + "\n";
+                    }
+                }
+
+                sr.Close();
+
+                StreamWriter sw = new StreamWriter(dir + "\\psds\\psd.txt", append: false);
+                sw.Write(data);
+                sw.Close();
+
+            } catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+                Application.Exit();
+            }
+
+            return true;
+        }
+
+        public static bool ChangePassword(PSD newPassword, PSD originalPassword)
+        {
+            try
+            {
+                StreamReader sr = File.OpenText(dir + "\\psds\\psd.txt");
+
+                string encryptedData = EncryptorLIB.Encryptor.EncryptWithKey(originalPassword.name + "[" + originalPassword.value, Form1.key), 
+                    newData = EncryptorLIB.Encryptor.EncryptWithKey(newPassword.name + "[" + newPassword.value, Form1.key);
+                string line;
+                string data = "";
+
+                while ((line = sr.ReadLine()) != null)
+                {
+                    if (encryptedData != line)
+                    {
+                        data += line + "\n";
+                    } else
+                    {
+                        data += newData + "\n";
+                    }
+                }
+
+                sr.Close();
+
+                StreamWriter sw = new StreamWriter(dir + "\\psds\\psd.txt", append: false);
+                sw.Write(data);
+                sw.Close();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+                Application.Exit();
+            }
+
+            return true;
+        }
     }
 }

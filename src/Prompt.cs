@@ -9,6 +9,29 @@ namespace PSDViewer
 {
     class Prompt
     {
+        public static bool YesNoDialog(string caption)
+        {
+            Form prompt = new Form()
+            {
+                Width = 200,
+                Height = 200,
+                FormBorderStyle = FormBorderStyle.FixedDialog,
+                Text = caption,
+                StartPosition = FormStartPosition.CenterScreen
+            };
+
+            Button yes = new Button() { Text = "Yes", Top=50, Width = 50, Height = 50, DialogResult = DialogResult.OK };
+            Button no = new Button() { Text = "No", Top = 50, Left =50, Width = 50, Height = 50, DialogResult = DialogResult.No };
+
+            yes.Click += (sender, e) => { prompt.Close(); };
+            no.Click += (sender, e) => { prompt.Close(); };
+
+            prompt.Controls.Add(yes);
+            prompt.Controls.Add(no);
+
+            return prompt.ShowDialog() == DialogResult.OK;
+        }
+
         public static string ShowSingleDialog(string text, string caption, bool isPassword=false)
         {
             Form prompt = new Form()
