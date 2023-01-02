@@ -1,5 +1,5 @@
 ﻿
-namespace PSDViewer
+namespace PSD_Viewer
 {
     partial class Form1
     {
