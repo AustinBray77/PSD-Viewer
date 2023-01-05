@@ -5,16 +5,20 @@ VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PSDViewer", "src\PSDViewer.csproj", "{64E4AB15-7B43-4230-8E3F-AA3E19F687E1}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "PSD-Viewer-Setup", "..\PSD-Viewer-Setup\PSD-Viewer-Setup.vdproj", "{3FD54030-49EA-4DC7-819F-3131310FAEB9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{64E4AB15-7B43-4230-8E3F-AA3E19F687E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{64E4AB15-7B43-4230-8E3F-AA3E19F687E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64E4AB15-7B43-4230-8E3F-AA3E19F687E1}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{64E4AB15-7B43-4230-8E3F-AA3E19F687E1}.Debug|Any CPU.Build.0 = Release|Any CPU
 		{64E4AB15-7B43-4230-8E3F-AA3E19F687E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{64E4AB15-7B43-4230-8E3F-AA3E19F687E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FD54030-49EA-4DC7-819F-3131310FAEB9}.Debug|Any CPU.ActiveCfg = Release
+		{3FD54030-49EA-4DC7-819F-3131310FAEB9}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

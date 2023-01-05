@@ -11,17 +11,17 @@ namespace PSD_Viewer
             //Creates a 200 x 200 window
             Form prompt = new Form()
             {
-                Width = 200,
-                Height = 200,
+                Width = 350,
+                Height = 150,
                 FormBorderStyle = FormBorderStyle.FixedDialog,
                 Text ="Are you sure?",
                 StartPosition = FormStartPosition.CenterScreen
             };
 
             //Creates a label with a yes or no button
-            Label label = new Label() { Left = 50, Top = 20, Text = caption, Width = 400 };
-            Button yes = new Button() { Text = "Yes", Top=50, Width = 50, Height = 50, DialogResult = DialogResult.OK };
-            Button no = new Button() { Text = "No", Top = 50, Left =50, Width = 50, Height = 50, DialogResult = DialogResult.No };
+            Label label = new Label() { Left = 50, Top = 20, Text = caption, Width = 250};
+            Button yes = new Button() { Text = "Yes", Top=50, Left = 50, Width = 100, Height = 50, DialogResult = DialogResult.OK };
+            Button no = new Button() { Text = "No", Top = 50, Left=200, Width = 100, Height = 50, DialogResult = DialogResult.No };
 
             //Sets the prompt to close with the answer when either button is pressed
             yes.Click += (sender, e) => { prompt.Close(); };

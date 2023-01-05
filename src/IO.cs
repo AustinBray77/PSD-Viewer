@@ -15,6 +15,16 @@ namespace PSD_Viewer
             List<Account> output = new List<Account>();
             try
             {
+                if(!Directory.Exists(Program.Dir + "\\psds"))
+                {
+                    Directory.CreateDirectory(Program.Dir + "\\psds");
+                }
+
+                if(!File.Exists(Program.Dir + "\\psds\\psd.txt"))
+                {
+                    File.Create(Program.Dir + "\\psds\\psd.txt");
+                }
+
                 //Loads the storage file
                 StreamReader sr = File.OpenText(Program.Dir + "\\psds\\psd.txt");
 
@@ -85,7 +95,7 @@ namespace PSD_Viewer
                 StreamReader sr = File.OpenText(Program.Dir + "\\psds\\psd.txt");
 
                 //Encrypts the given account
-                string encryptedData = EncryptorLIB.Encryptor.EncryptWithKey(account.Name + "[" + account.Password, Form1.Key);
+                string encryptedData = EncryptorLIB.Encryptor.EncryptWithKey(account.Name + "[" + account.Password, Program.Key);
                 
                 //Loops through each line of the file
                 string line;

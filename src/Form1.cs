@@ -82,7 +82,6 @@ namespace PSD_Viewer
             vScrollBar1.Size = new Size(25, Size.Height - 25);
             vScrollBar1.TabIndex = 0;
             vScrollBar1.ValueChanged += new System.EventHandler(vScrollBar1_ValueChanged);
-            vScrollBar1.Visible = 75 * _panels.Length > Size.Height;
 
             //Adds it to the controls
             Controls.Add(vScrollBar1);
@@ -90,6 +89,7 @@ namespace PSD_Viewer
             //Gets the password list from the stored file
             List<Account> psds = IO.LoadFile();
             _panels = new Panel[psds.Count];
+            vScrollBar1.Visible = 75 * _panels.Length > Size.Height;
 
             //Creates the panel for each password
             for (int i = 0; i < psds.Count; i++)
